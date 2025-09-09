@@ -1,0 +1,3 @@
+"C:\Users\user\Desktop\zapret-win-bundle-master\readme.md" working-tree-encoding=UTF-8-SIG
+"C:\Users\user\Desktop\zapret-win-bundle-master\zapret-winws\files\ipset-discord.txt" working-tree-encoding=ascii
+"C:\Users\user\Desktop\zapret-win-bundle-master\zapret-winws\files\list-youtube.txt" working-tree-encoding=ascii
