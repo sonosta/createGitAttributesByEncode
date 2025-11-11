@@ -1,4 +1,5 @@
 import os
+import sys
 import chardet
 from pathlib import Path
 
@@ -17,14 +18,23 @@ def recursive_encoding_check(folder):
 
             encoding_str = encoding if encoding is not None else ""
             extension = Path(file_path).suffix
-            if encoding_str != "" and extension in ['.txt', '.md', '.json', '.xml', '.html'] :
-                arr_strings.append('"'+ file_path + '"' + " working-tree-encoding=" + encoding_str + "\n")
+            short_path = str(Path(file_path).relative_to(folder)).replace('\\', '/')
+            if encoding_str != "" and extension in ['.cod', '.mtl', '.lis', '.tpl', '.bro'] :
+                if 'windows-' in encoding_str.lower() :
+                    encoding_str = encoding_str.replace('windows-', 'cp') + ' eol=crlf'
+                file_path = short_path
+                arr_strings.append(file_path  + " working-tree-encoding=" + encoding_str + "\n")
             
-            print(f"File: {file_path}, Encoding: {encoding}")
+            print(f"File: {file_path}, Encoding: {encoding}, Short path: {short_path}")
             
-    with open("output.txt", "w", encoding="utf-8") as f:
+    with open(".gitattributes", "w", encoding="utf-8") as f:
         f.writelines(arr_strings)
 
-# Использование:
-folder_path = "C:\\Users\\user\\Desktop\\zapret-win-bundle-master"
-recursive_encoding_check(folder_path)
+# Проверяем указанные аргументы при запуске скрипта
+
+if len(sys.argv) <= 1:
+    print("Укажите папку по которой будет осуществляться поиск. Пример запуска 'python addAttributes.py `C:\\TESTGIT\\Projects`'")
+else:
+    print(sys.argv[1])
+    folder_path = sys.argv[1]
+    recursive_encoding_check(folder_path)
