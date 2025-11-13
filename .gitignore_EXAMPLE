@@ -9,3 +9,8 @@
 !*.lis
 !*.tpl
 !*.bro
+!*.bak
+!*.deb
+!*.dsk
+!*.prj
+!*.sig
